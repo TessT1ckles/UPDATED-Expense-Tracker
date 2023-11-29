@@ -1,4 +1,4 @@
-package com.mycompany.projectoop;
+ package com.mycompany.projectoop;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
+import static java.lang.Double.parseDouble;
 
 class editFile extends viewFile{
-    private int newFood, newTransport, newElectricity, newHousing, newEssential, newNonEssential;
+    private double newFood, newTransport, newUtilityBill, newEssential, newNonEssential;
     private int editChoose;
     
     //contructor
@@ -18,36 +18,28 @@ class editFile extends viewFile{
         this.editChoose = editChoose;
     }
     
-    private int addTotal(int value1, int value2){
-        return value1 + value2;
-    }
-    private int reduceTotal(int value1, int value2){
-        return value1 - value2;
-    }
+    totalEssential n = new totalEssential();
     
-    public void editRecord(int newFood, int newTransport, int newElectricity,
-            int newHousing, int newNonEssential){
+    public void editRecord(double newFood, double newTransport, double newUtilityBill, double newNonEssential){
         String fileName = "Record" + fileCount + ".txt";
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
         String line;
         date = reader.readLine();
-        food = parseInt(reader.readLine());
-        transport = parseInt(reader.readLine());
-        electricity = parseInt(reader.readLine());
-        housing = parseInt(reader.readLine());
-        essential = parseInt(reader.readLine());
-        nonEssential = parseInt(reader.readLine());
+        food = parseDouble(reader.readLine());
+        transport = parseDouble(reader.readLine());
+        utilityBill = parseDouble(reader.readLine());
+        essential = parseDouble(reader.readLine());
+        nonEssential = parseDouble(reader.readLine());
         reader.close();
         }catch(IOException e) {
             System.err.println("Error writting to file: " + e.getMessage());
         }
         if(editChoose == 1){
-            newFood = addTotal(food, newFood);
-            newTransport = addTotal(transport, newTransport);
-            newElectricity = addTotal(electricity, newElectricity);
-            newHousing = addTotal(housing, newHousing);
-            newEssential = newFood + newTransport + newElectricity + newHousing;
-            newNonEssential = addTotal(nonEssential, newNonEssential);
+            newFood = n.add(food, newFood);
+            newTransport = n.add(transport, newTransport);
+            newUtilityBill = n.add(utilityBill, newUtilityBill);
+            newEssential = newFood + newTransport + newUtilityBill;
+            newNonEssential = n.add(nonEssential, newNonEssential);
             
             File file = new File(fileName);
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
@@ -55,8 +47,7 @@ class editFile extends viewFile{
             writer.write(date + "\n");
             writer.write(newFood + "\n");
             writer.write(newTransport + "\n");
-            writer.write(newElectricity + "\n");
-            writer.write(newHousing + "\n");
+            writer.write(newUtilityBill+ "\n");
             writer.write(newEssential + "\n");
             writer.write(newNonEssential + "\n");
             writer.close();
@@ -66,12 +57,11 @@ class editFile extends viewFile{
             }
         }
         else if(editChoose == 2){
-            newFood = reduceTotal(food, newFood);
-            newTransport = reduceTotal(transport, newTransport);
-            newElectricity = reduceTotal(electricity, newElectricity);
-            newHousing = reduceTotal(housing, newHousing);
-            newEssential = newFood + newTransport + newElectricity + newHousing;
-            newNonEssential = reduceTotal(nonEssential, newNonEssential);
+            newFood = n.subtract(food, newFood);
+            newTransport = n.subtract(transport, newTransport);
+            newUtilityBill = n.subtract(utilityBill, newUtilityBill);
+            newEssential = newFood + newTransport + newUtilityBill;
+            newNonEssential = n.subtract(nonEssential, newNonEssential);
             
             File file = new File(fileName);
             try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
@@ -79,8 +69,7 @@ class editFile extends viewFile{
             writer.write(date + "\n");
             writer.write(newFood + "\n");
             writer.write(newTransport + "\n");
-            writer.write(newElectricity + "\n");
-            writer.write(newHousing + "\n");
+            writer.write(newUtilityBill + "\n");
             writer.write(newEssential + "\n");
             writer.write(newNonEssential + "\n");
             writer.close();
@@ -94,22 +83,20 @@ class editFile extends viewFile{
         String fileName = "Record" + fileCount + ".txt";
         File file = new File(fileName);
         file.delete();
-        System.out.println("The file has been deleted!");
         fileCount++;
         fileName = "Record" + fileCount + ".txt";
         file = new File(fileName);
         while(file.exists()){
             try(BufferedReader reader = new BufferedReader(new FileReader(file))){
                 date = reader.readLine();
-                food = parseInt(reader.readLine());
-                transport = parseInt(reader.readLine());
-                electricity = parseInt(reader.readLine());
-                housing = parseInt(reader.readLine());
-                essential = parseInt(reader.readLine());
-                nonEssential = parseInt(reader.readLine());
+                food = parseDouble(reader.readLine());
+                transport = parseDouble(reader.readLine());
+                utilityBill = parseDouble(reader.readLine());
+                essential = parseDouble(reader.readLine());
+                nonEssential = parseDouble(reader.readLine());
                 reader.close();
             }catch(IOException e){
-                System.err.println("Failed to Retreive file: " + e.getMessage());
+                System.err.println("Failed to Retrieve file: " + e.getMessage());
             }
             file.delete();
             fileCount--;
@@ -120,8 +107,7 @@ class editFile extends viewFile{
                 writer.write(date + "\n");
                 writer.write(food + "\n");
                 writer.write(transport + "\n");
-                writer.write(electricity + "\n");
-                writer.write(housing + "\n");
+                writer.write(utilityBill + "\n");
                 writer.write(essential + "\n");
                 writer.write(nonEssential + "\n");
                 writer.close();
