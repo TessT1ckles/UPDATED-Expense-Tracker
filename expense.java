@@ -6,21 +6,19 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
-import static java.lang.Integer.parseInt;
 
 class expense{
     private String date;
-    private int food, transport, electricity, housing;
-    private int essential;
-    private int nonEssential;
+    private double food, transport, utilityBill;
+    private double essential;
+    private double nonEssential;
     
     // constructor for all variables in add user
-    public expense(String date,int food, int transport, int electricity, int housing, 
-            int essential, int nonEssential){
+    public expense(String date, double food, double transport, double utilityBill, 
+            double essential, double nonEssential){
         this.food = food;
         this.transport = transport;
-        this.electricity = electricity;
-        this.housing = housing;
+        this.utilityBill = utilityBill;
         this.date = date;
         this.essential = essential;
         this.nonEssential = nonEssential;
@@ -30,26 +28,23 @@ class expense{
     public String getDate(){
         return date;
     }
-    public int getFood(){
+    public double getFood(){
         return food;
     }
-    public int getTransport(){
+    public double getTransport(){
         return transport;
     }
-    public int getElectricity(){
-        return electricity;
+    public double getUtilityBill(){
+        return utilityBill;
     }
-    public int getHousing(){
-        return housing;
-    }
-    public int getEssential(){
+    public double getEssential(){
         return essential;
     }
-    public int getNonEssential(){
+    public double getNonEssential(){
         return nonEssential;
     }
     
-    public void addRecord(String fileName){
+    public void newRecord(String fileName){
         File file = new File(fileName);
         int count = 2;
         if(file.exists()){
@@ -59,21 +54,23 @@ class expense{
                 count++;
             }
         }
-        //make file writter
+        //make file writer
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
-            //if filename not existing then next :-D
+            //if filename not existing then next
             writer.write(date + "\n");
             writer.write(food + "\n");
             writer.write(transport + "\n");
-            writer.write(electricity + "\n");
-            writer.write(housing + "\n");
+            writer.write(utilityBill + "\n");
             writer.write(essential + "\n");
             writer.write(nonEssential + "\n");
             writer.close();
-            System.out.println("Record Saved!");
+            
+            System.out.println("===========================");
+            System.out.println("       RECORD SAVED!\n");
         }
         catch(IOException e) {
-            System.err.println("Error writting to file: " + e.getMessage());
+            System.err.println("Error writing to file: " + e.getMessage());
         }
     }
+
 }
