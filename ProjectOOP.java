@@ -39,13 +39,13 @@ public class ProjectOOP {
                     System.out.println("Input your Expense(s): ");
                     //essentials
                     System.out.print("  Food: ");
-                    double food = userInput.nextInt();
+                    double food = userInput.nextDouble();
 
                     System.out.print("  Transportation: ");
-                    double transport = userInput.nextInt();
+                    double transport = userInput.nextDouble();
 
                     System.out.print("  Utility Bills: ");
-                    double utilityBill = userInput.nextInt();
+                    double utilityBill = userInput.nextDouble();
 
                     //for total essential
                     totalEssential t = new totalEssential();
@@ -53,7 +53,7 @@ public class ProjectOOP {
 
 
                     System.out.print("  Others: ");
-                    int nonEssential = userInput.nextInt();
+                    double nonEssential = userInput.nextDouble();
 
                     expense e = new expense(date, food, transport, utilityBill, essential, nonEssential);
                     e.newRecord("Record1.txt");
@@ -91,13 +91,13 @@ public class ProjectOOP {
                                 System.out.println("----------------------------");
                                 System.out.println("Enter values: ");
                                 System.out.print("   Food: ");
-                                int addFood = userInput.nextInt();
+                                double addFood = userInput.nextDouble();
                                 System.out.print("   Transportation: ");
-                                int addTransport = userInput.nextInt();
+                                double addTransport = userInput.nextDouble();
                                 System.out.print("   Utility Bills: ");
-                                int addUtilityBill = userInput.nextInt();
+                                double addUtilityBill = userInput.nextDouble();
                                 System.out.print("   Others: ");
-                                int addNonEssential = userInput.nextInt();
+                                double addNonEssential = userInput.nextDouble();
 
                                 ef.editRecord(addFood, addTransport, addUtilityBill, addNonEssential);
                                 break;
