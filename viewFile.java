@@ -29,12 +29,12 @@ class viewFile{
             System.out.println("\n\n============================");
             System.out.println(" " + date);
             System.out.println("============================");
-            System.out.println("   Food          |  " + food);
-            System.out.println("   Transport     |  " + transport);
-            System.out.println("   Utility Bills |  " + utilityBill);
+            System.out.printf("   Food          |  %.2f \n", food);
+            System.out.printf("   Transport     |  %.2f \n", transport);
+            System.out.printf("   Utility Bills |  %.2f \n", utilityBill);
             System.out.println("----------------------------");
-            System.out.println("   Essential     |  " + essential);
-            System.out.println("   Non-Essential |  " + nonEssential);
+            System.out.printf("   Essential     |  %.2f \n", essential);
+            System.out.printf("   Non-Essential |  %.2f \n", nonEssential);
             System.out.println("----------------------------\n");
             reader.close();
         }catch(IOException e){
