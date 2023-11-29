@@ -21,7 +21,7 @@ class previewFiles{
             try(BufferedReader reader = new BufferedReader(new FileReader(file))){
                 String dateText = reader.readLine();
 
-                System.out.println(fileCount + ") " + dateText);
+                System.out.println("   " + fileCount + ") " + dateText);
                 fileName = "Record" + count + ".txt";
                 file = new File (fileName);
                 count++;
